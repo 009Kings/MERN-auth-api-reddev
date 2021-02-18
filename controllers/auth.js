@@ -61,12 +61,14 @@ router.put(
   '/user', 
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    // get the token from the req headers
-    let token = req.headers.authorization.split(' ')[1]
-    // decode the token to get those sweet payload deets
-    let decoded = jwt.verify(token, process.env.JWT_SECRET);
-    // update a user based on the id from token and update info from body
-    db.User.findByIdAndUpdate(decoded.id, { name: req.body.name })
+    // ------------ THIS IS THE HARD WAY ---------------
+    // // get the token from the req headers
+    // let token = req.headers.authorization.split(' ')[1]
+    // // decode the token to get those sweet payload deets
+    // let decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    // update a user based on the id from request and update info from body
+    db.User.findByIdAndUpdate(req.user.id, { name: req.body.name })
       .then(user => {
         res.status(201).json(user);
       });

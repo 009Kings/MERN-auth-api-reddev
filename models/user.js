@@ -1,7 +1,15 @@
 const mongoose = require('mongoose');
 
 const options = {
-  timestamps: true
+  timestamps: true,
+  id: false,
+  toJSON: {
+    virtuals: true,
+    transform: (_doc, userDocToReturn) => {
+      delete userDocToReturn.password;
+      return userDocToReturn;
+    }
+  }
 }
 
 const userSchema = new mongoose.Schema({

@@ -68,7 +68,7 @@ router.put(
     // let decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // update a user based on the id from request and update info from body
-    db.User.findByIdAndUpdate(req.user.id, { name: req.body.name })
+    db.User.findByIdAndUpdate(req.user._id, { name: req.body.name })
       .then(user => {
         res.status(201).json(user);
       });

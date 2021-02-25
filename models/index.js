@@ -23,3 +23,4 @@ mongoose.connection.on('error', err =>
 
 // export
 module.exports.User = require('./user');
+module.exports.Bounty = require('./bounty');
